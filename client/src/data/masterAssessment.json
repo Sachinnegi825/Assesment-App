@@ -1,0 +1,385 @@
+{
+  "assessment_meta": {
+    "title": "Platoputer Research Assistant Pre-Assessment",
+    "total_questions": 25,
+    "time_limit_minutes": 25,
+    "scoring": {
+      "correct": 1,
+      "incorrect": -1,
+      "unanswered": 0
+    },
+    "intent": "Fast filtering for intuitive understanding vs lookup dependency"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "section": "General",
+      "topic": "Platonic solids",
+      "question": "How many Platonic solids exist?",
+      "options": { "A": "3", "B": "4", "C": "5", "D": "6" },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Core recall. Anyone who studied the repo should instantly know 5."
+    },
+    {
+      "id": 2,
+      "section": "General",
+      "topic": "System thesis",
+      "question": "Which is NOT a system objective?",
+      "options": {
+        "A": "Repeatability",
+        "B": "Separability",
+        "C": "Profitability",
+        "D": "Interpretability"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Direct from system thesis."
+    },
+    {
+      "id": 3,
+      "section": "General",
+      "topic": "Frequency",
+      "question": "Primary operating regime?",
+      "options": {
+        "A": "Audible",
+        "B": "Ultrasonic",
+        "C": "RF",
+        "D": "Infrared"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Ultrasonic (>20kHz) is locked design"
+    },
+    {
+      "id": 4,
+      "section": "General",
+      "topic": "ML",
+      "question": "First-pass ML models?",
+      "options": {
+        "A": "CNN",
+        "B": "RNN",
+        "C": "RF + SVM",
+        "D": "Transformer"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Low-data regime choice"
+    },
+    {
+      "id": 5,
+      "section": "General",
+      "topic": "Excitation",
+      "question": "Why hybrid excitation?",
+      "options": {
+        "A": "Faster",
+        "B": "Validation + mapping",
+        "C": "Cheaper",
+        "D": "Less noise"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Single-tone = validation, sweep = mapping"
+    },
+    {
+      "id": 6,
+      "section": "Research",
+      "topic": "Signal chain",
+      "question": "What comes after geometric body?",
+      "options": {
+        "A": "ADC",
+        "B": "Sensor",
+        "C": "Classifier",
+        "D": "FFT"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Signal flow recall test"
+    },
+    {
+      "id": 7,
+      "section": "Research",
+      "topic": "FFT",
+      "question": "Default window function?",
+      "options": {
+        "A": "Hann",
+        "B": "Rectangular",
+        "C": "Gaussian",
+        "D": "None"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "Core FFT standard"
+    },
+    {
+      "id": 8,
+      "section": "Research",
+      "topic": "Sampling",
+      "question": "Default sampling rate?",
+      "options": {
+        "A": "44.1kHz",
+        "B": "96kHz",
+        "C": "192kHz",
+        "D": "1kHz"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Ultrasonic requirement"
+    },
+    {
+      "id": 9,
+      "section": "Research",
+      "topic": "Calibration",
+      "question": "Peak tolerance band?",
+      "options": {
+        "A": "±0.1%",
+        "B": "±1%",
+        "C": "±10%",
+        "D": "No tolerance"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Critical calibration memory"
+    },
+    {
+      "id": 10,
+      "section": "Research",
+      "topic": "Feature",
+      "question": "Which is NOT a feature block?",
+      "options": {
+        "A": "Spectral peaks",
+        "B": "Energy",
+        "C": "Phase",
+        "D": "Color gradient"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Pattern recognition"
+    },
+    {
+      "id": 11,
+      "section": "Build",
+      "topic": "Actuation",
+      "question": "Piezo placement?",
+      "options": {
+        "A": "Random",
+        "B": "Edge",
+        "C": "Face centroid",
+        "D": "Inside"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Critical build rule"
+    },
+    {
+      "id": 12,
+      "section": "Build",
+      "topic": "Bonding",
+      "question": "Excess adhesive causes?",
+      "options": {
+        "A": "Better coupling",
+        "B": "Spectrum distortion",
+        "C": "No change",
+        "D": "Faster signal"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Mechanical intuition test"
+    },
+    {
+      "id": 13,
+      "section": "Build",
+      "topic": "Sensing",
+      "question": "Sensor input must be?",
+      "options": {
+        "A": "Low impedance",
+        "B": "High impedance",
+        "C": "Digital",
+        "D": "Wireless"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Electronics fundamentals"
+    },
+    {
+      "id": 14,
+      "section": "Build",
+      "topic": "Environment",
+      "question": "Ultrasonic noise source?",
+      "options": {
+        "A": "Books",
+        "B": "Laptop charger",
+        "C": "Table",
+        "D": "Chair"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Real-world awareness"
+    },
+    {
+      "id": 15,
+      "section": "Build",
+      "topic": "Fixture",
+      "question": "Forbidden support?",
+      "options": {
+        "A": "Elastomer",
+        "B": "Point support",
+        "C": "Soft undefined foam",
+        "D": "Standoff"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Critical failure prevention"
+    },
+    {
+      "id": 16,
+      "section": "Research",
+      "topic": "ML",
+      "question": "Why RF is used?",
+      "options": {
+        "A": "Needs big data",
+        "B": "Handles nonlinear features",
+        "C": "Only for images",
+        "D": "Fast GPU"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Concept clarity"
+    },
+    {
+      "id": 17,
+      "section": "Research",
+      "topic": "ML",
+      "question": "Wrong data split?",
+      "options": {
+        "A": "Session-based",
+        "B": "Random row split",
+        "C": "Day-based",
+        "D": "Condition-based"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Leakage awareness"
+    },
+    {
+      "id": 18,
+      "section": "Research",
+      "topic": "FFT",
+      "question": "Long FFT used for?",
+      "options": {
+        "A": "Speed",
+        "B": "Peak precision",
+        "C": "Noise",
+        "D": "Compression"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Signal reasoning"
+    },
+    {
+      "id": 19,
+      "section": "Research",
+      "topic": "Data",
+      "question": "Dataset priority?",
+      "options": {
+        "A": "Volume",
+        "B": "Quality",
+        "C": "Randomness",
+        "D": "Speed"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Low-data principle"
+    },
+    {
+      "id": 20,
+      "section": "Research",
+      "topic": "Validation",
+      "question": "Level 1 validation?",
+      "options": {
+        "A": "Accuracy",
+        "B": "Channel integrity",
+        "C": "Scaling",
+        "D": "Deployment"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Validation ladder recall"
+    },
+    {
+      "id": 21,
+      "section": "General",
+      "topic": "Physics",
+      "question": "Resonance means?",
+      "options": {
+        "A": "Random vibration",
+        "B": "Max response at frequency",
+        "C": "No vibration",
+        "D": "Heat loss"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Fundamental physics intuition"
+    },
+    {
+      "id": 22,
+      "section": "Build",
+      "topic": "Safety",
+      "question": "Piezo damage cause?",
+      "options": {
+        "A": "Low voltage",
+        "B": "Heat",
+        "C": "Silence",
+        "D": "Calibration"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Safety awareness"
+    },
+    {
+      "id": 23,
+      "section": "Research",
+      "topic": "Feature",
+      "question": "Feature vector must be?",
+      "options": {
+        "A": "Large",
+        "B": "Random",
+        "C": "Interpretable",
+        "D": "Hidden"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Core philosophy"
+    },
+    {
+      "id": 24,
+      "section": "Build",
+      "topic": "Orientation",
+      "question": "Why mark orientation?",
+      "options": {
+        "A": "Looks",
+        "B": "Repeatability",
+        "C": "Speed",
+        "D": "Weight"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Critical hidden failure mode"
+    },
+    {
+      "id": 25,
+      "section": "Research",
+      "topic": "Philosophy",
+      "question": "If model improves suddenly?",
+      "options": {
+        "A": "Celebrate",
+        "B": "Check artifacts first",
+        "C": "Publish",
+        "D": "Ignore"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Scientific rigor test"
+    }
+  ]
+}
