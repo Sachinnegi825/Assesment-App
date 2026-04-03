@@ -29,6 +29,7 @@ function AssessmentPage() {
   const isFirstQuestion = currentQuestionIndex === 0
   const isLastQuestion = currentQuestionIndex === questions.length - 1
   const isSubmitting = completionState.status === 'submitting'
+  const isExpired = secondsRemaining === 0
   const submitError = completionState.status === 'error' ? completionState.message : ''
 
   useEffect(() => {
@@ -185,13 +186,16 @@ function AssessmentPage() {
                 <button
                   aria-checked={isActive}
                   className={isActive ? 'option-button option-button--active' : 'option-button'}
+                  disabled={isSubmitting || isExpired}
                   key={option.id}
                   onClick={() => handleSelect(option.id)}
                   role="radio"
                   type="button"
                 >
-                  <span className="option-button__key">{option.id}</span>
-                  <span>{option.label}</span>
+                  <span className="option-button__indicator">
+                    <span className="option-button__inner" />
+                  </span>
+                  <span className="option-button__label">{option.label}</span>
                 </button>
               )
             })}
@@ -212,7 +216,7 @@ function AssessmentPage() {
           <div className="question-actions">
             <button
               className="secondary-button secondary-button--tight"
-              disabled={isFirstQuestion}
+              disabled={isFirstQuestion || isSubmitting || isExpired}
               onClick={handlePrevious}
               type="button"
             >
@@ -221,13 +225,18 @@ function AssessmentPage() {
 
             <div className="question-actions__right">
               {!isLastQuestion ? (
-                <button className="primary-button" onClick={handleNext} type="button">
+                <button
+                  className="primary-button"
+                  disabled={isSubmitting || isExpired}
+                  onClick={handleNext}
+                  type="button"
+                >
                   Next
                 </button>
               ) : (
                 <button
                   className="primary-button"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isExpired}
                   onClick={handleSubmit}
                   type="button"
                 >
@@ -239,6 +248,17 @@ function AssessmentPage() {
         </article>
 
         <aside className="question-sidebar">
+          <div className="sidebar-stats">
+            <div className="stat-row">
+              <span className="stat-dot stat-dot--answered" />
+              <span>{answeredCount} Answered</span>
+            </div>
+            <div className="stat-row">
+              <span className="stat-dot stat-dot--pending" />
+              <span>{questions.length - answeredCount} Pending</span>
+            </div>
+          </div>
+
           <p className="info-card__label">Question map</p>
           <div className="question-map">
             {questions.map((question, index) => {
@@ -255,6 +275,7 @@ function AssessmentPage() {
               return (
                 <button
                   className={className}
+                  disabled={isSubmitting || isExpired}
                   key={question.id}
                   onClick={() => goToQuestion(index)}
                   type="button"

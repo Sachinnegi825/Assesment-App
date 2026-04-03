@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import AdminWorkspaceNav from '../components/AdminWorkspaceNav'
 import SessionShell from '../components/SessionShell'
+import { useAuth } from '../context/useAuth'
 import { changeAdminPassword } from '../services/api'
 import { validateAdminPasswordForm } from '../utils/adminPasswordValidation'
 
 function AdminSettingsPage() {
+  const navigate = useNavigate()
+  const { logout } = useAuth()
   const [values, setValues] = useState({
     confirmNewPassword: '',
     currentPassword: '',
@@ -53,7 +56,16 @@ function AdminSettingsPage() {
         currentPassword: '',
         newPassword: '',
       })
-      setSuccessMessage(payload.message || 'Admin password updated successfully.')
+      setSuccessMessage(payload.message || 'Admin password updated successfully. Signing out...')
+
+      // Delay briefly so the user sees the success message before logout/redirect
+      setTimeout(async () => {
+        await logout()
+        navigate('/admin/login', {
+          replace: true,
+          state: { message: 'Your password was changed successfully. Please sign in with your new password.' },
+        })
+      }, 1500)
     } catch (error) {
       if (error.details) {
         setErrors((current) => ({

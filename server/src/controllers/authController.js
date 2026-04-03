@@ -71,7 +71,6 @@ export async function loginAdmin(request, response) {
     })
   }
 
-  console.log
 
   const result = await authenticateAdmin(request.body)
 

@@ -68,6 +68,7 @@ export async function ensureSeedAdminUser() {
 
 export async function findAdminUserByEmail(email) {
   const normalizedEmail = email.trim().toLowerCase()
+
   return adminUserRepository.findByEmail(normalizedEmail)
 }
 
@@ -124,6 +125,7 @@ export async function updateAdminPassword({
   newPassword,
 }) {
   const adminUser = await findAdminUserByEmail(email)
+
 
   if (!adminUser) {
     return {

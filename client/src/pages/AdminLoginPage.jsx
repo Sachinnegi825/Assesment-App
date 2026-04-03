@@ -18,20 +18,7 @@ function AdminLoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const redirectTarget = location.state?.from || '/admin/dashboard'
-
-  if (isAuthLoading) {
-    return (
-      <main className="auth-shell auth-shell--admin">
-        <section className="auth-card auth-card--compact auth-card--admin">
-          <BrandMark compact />
-          <h1>Restoring admin session</h1>
-          <p className="auth-support-copy">
-            Checking whether an active evaluator session already exists.
-          </p>
-        </section>
-      </main>
-    )
-  }
+  const successMessage = location.state?.message
 
   if (isAuthenticated) {
     return <Navigate replace to={user?.role === 'admin' ? '/admin/dashboard' : '/dashboard'} />
@@ -118,6 +105,12 @@ function AdminLoginPage() {
               <small className="field-error">{errors.password}</small>
             ) : null}
           </label>
+
+          {successMessage ? (
+            <div className="form-message form-message--info" role="status">
+              {successMessage}
+            </div>
+          ) : null}
 
           {submitError ? (
             <div className="form-message form-message--error" role="alert">

@@ -16,20 +16,6 @@ function LoginPage() {
 
   const redirectTarget = location.state?.from || '/dashboard'
 
-  if (isAuthLoading) {
-    return (
-      <main className="auth-shell">
-        <section className="auth-card auth-card--compact">
-          <BrandMark compact />
-          <h1>Restoring session</h1>
-          <p className="auth-support-copy">
-            Checking whether an active candidate session already exists.
-          </p>
-        </section>
-      </main>
-    )
-  }
-
   if (isAuthenticated) {
     return <Navigate replace to={user?.role === 'admin' ? '/admin/dashboard' : '/dashboard'} />
   }

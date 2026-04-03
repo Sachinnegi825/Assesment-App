@@ -51,7 +51,10 @@ export async function authenticateCandidate({ email, password }) {
 }
 
 export async function authenticateAdmin({ email, password }) {
+  console.log('authenticateAdmin input', email) // 🔥 DEBUG LOG
   const adminUser = await findAdminUserByEmail(email)
+
+  console.log('authenticateAdmin', adminUser) // 🔥 DEBUG LOG
 
   if (!adminUser) {
     return null
