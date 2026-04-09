@@ -74,6 +74,8 @@ function AdminDashboardPage() {
     uniqueIpCount: 0,
   }
 
+  console.log("latest suvmies",latestSubmissions)
+
   return (
     <SessionShell
       action={
@@ -229,7 +231,7 @@ function AdminDashboardPage() {
                       <td>
                         <span
   className={`dashboard-badge dashboard-badge--${
-    submission.reason === 'Completed manually'
+    submission.statusLabel === 'Completed manually'
       ? 'success'
       : 'warning'
   }`}
