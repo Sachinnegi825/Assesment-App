@@ -36,6 +36,8 @@ function AdminSubmissionsPage() {
   const query = searchParams.get('query') || ''
   const status = searchParams.get('status') || 'all'
 
+
+
   useEffect(() => {
     setFormState({
       query,
@@ -57,6 +59,8 @@ function AdminSubmissionsPage() {
           query,
           status,
         })
+
+        console.log('Fetched submissions:', payload)
 
         if (isMounted) {
           setData(payload.data)

@@ -10,11 +10,14 @@ function CandidateDetailsPage() {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { candidateDetails, saveCandidateDetails } = useAssessment()
-  const [values, setValues] = useState(() => ({
-    ...candidateDetails,
-    email: candidateDetails.email || user?.email || '',
-  }))
-  const [errors, setErrors] = useState({})
+const [values, setValues] = useState({
+  fullName: "",
+  age: "",
+  email: "",
+  location: "",
+  roleApplied: ""
+})  
+const [errors, setErrors] = useState({})
   const [submitError, setSubmitError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isConsentOpen, setIsConsentOpen] = useState(false)
@@ -105,6 +108,7 @@ function CandidateDetailsPage() {
                 placeholder="Enter full name"
                 type="text"
                 value={values.fullName}
+                required
               />
               {errors.fullName ? <small className="field-error">{errors.fullName}</small> : null}
             </label>
@@ -121,6 +125,7 @@ function CandidateDetailsPage() {
                   placeholder="18"
                   type="text"
                   value={values.age}
+                  required
                 />
                 {errors.age ? <small className="field-error">{errors.age}</small> : null}
               </label>
@@ -136,6 +141,7 @@ function CandidateDetailsPage() {
                   placeholder="candidate@sidlabs.com"
                   type="email"
                   value={values.email}
+                  required
                 />
                 {errors.email ? <small className="field-error">{errors.email}</small> : null}
               </label>

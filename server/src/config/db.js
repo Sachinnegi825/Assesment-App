@@ -5,7 +5,6 @@ let databaseStatus = 'disconnected'
 
 export async function connectDatabase() {
 
-  console.log("env",env)
 
   if (!env.mongoUri) {
     databaseStatus = 'failed'

@@ -108,8 +108,14 @@ function toAdminTableRow(submission) {
     assessmentTitle: assessmentDefinition.metadata.assessmentTitle,
     candidateEmail: submission.candidateDetails?.email || '',
     candidateName: submission.candidateDetails?.fullName || 'Unnamed candidate',
-    completionStatus:
-      submission.reason === 'timer_expired' ? 'Expired on timer' : 'Completed manually',
+    completionStatus: 
+  submission.reason === 'manual_submit' ? 'Completed manually' :
+  submission.reason === 'timer_expired' ? 'Expired on timer' :
+  submission.reason === 'integrity_violation_limit' ? 'Terminated: Security violations' :
+  submission.reason === 'user_signout' ? 'Partial: Signed out' :
+  submission.reason === 'user_left_tab_or_window' ? 'Partial: Tab switched' :
+  submission.reason === 'user_closed_tab_or_browser' ? 'Partial: Browser closed' :
+  'Auto-saved progress',
     location: submission.candidateDetails?.location || '',
     roleApplied: submission.candidateDetails?.roleApplied || '',
     score,

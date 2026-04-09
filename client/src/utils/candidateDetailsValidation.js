@@ -3,11 +3,11 @@ const EMAIL_PATTERN =
 
 export function validateCandidateDetails(values) {
   const errors = {}
-  const fullName = values.fullName.trim()
-  const location = values.location.trim()
-  const roleApplied = values.roleApplied.trim()
-  const email = values.email.trim()
-  const ageValue = String(values.age).trim()
+  const fullName = values?.fullName?.trim()
+  const location = values?.location?.trim()
+  const roleApplied = values?.roleApplied?.trim()
+  const email = values?.email?.trim()
+  const ageValue = String(values?.age).trim()
 
   if (!fullName) {
     errors.fullName = 'Full name is required.'

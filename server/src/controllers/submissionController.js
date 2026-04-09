@@ -6,12 +6,10 @@ import {
 } from '../services/submissionService.js'
 
 export async function submitAssessment(request, response) {
-  console.info('[server] submission started')
-
-  const validation = validateSubmissionPayload(request.body)
+  // CRITICAL: Added await here because validateSubmissionPayload is now an async function
+  const validation = await validateSubmissionPayload(request.body)
 
   if (!validation.isValid) {
-    console.warn('[server] submission invalid')
     return response.status(400).json({
       code: 'SUBMISSION_VALIDATION_FAILED',
       errors: validation.errors,
@@ -20,19 +18,17 @@ export async function submitAssessment(request, response) {
     })
   }
 
-  if (!ensureSubmissionNotDuplicate(validation.submissionKey)) {
-    console.warn('[server] submission failed: duplicate')
+  // Pass the reason to the duplicate checker
+  if (!ensureSubmissionNotDuplicate(validation.submissionKey, validation.normalizedPayload.reason)) {
     return response.status(409).json({
       code: 'DUPLICATE_SUBMISSION',
-      message: 'This assessment attempt has already been submitted.',
+      message: 'This assessment has already been finalized.',
       success: false,
     })
   }
 
-  console.info('[server] submission payload valid')
-
   try {
-    await mirrorSubmission(validation.normalizedPayload)
+    await mirrorSubmission(validation.normalizedPayload);
 
     console.info('[server] submission stored/mirrored')
     return response.status(201).json({

@@ -46,6 +46,15 @@ const assessmentSubmissionSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    integrityReport: {
+  violationCount: { type: Number, default: 0 },
+  violationLog: [{
+    type: { type: String },
+    detail: String,
+    timestamp: Date
+  }],
+  proctoringActive: { type: Boolean, default: false }
+},
   },
   {
     collection: 'assessment_submissions',

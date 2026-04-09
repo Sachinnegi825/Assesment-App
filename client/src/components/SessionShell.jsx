@@ -14,7 +14,7 @@ function SessionShell({
   const navigate = useNavigate()
   const location = useLocation()
   const { logout, user } = useAuth()
-  const { assessmentSession, submitAssessment, completionState } = useAssessment()
+  const { assessmentSession, autoSubmit, completionState } = useAssessment()
 
   const isAssessmentPage = location.pathname === '/assessment'
   const isSubmitting = completionState.status === 'submitting'
@@ -24,19 +24,21 @@ function SessionShell({
       return
     }
 
-    try {
-      // If the user is on the assessment page and hasn't submitted yet, auto-submit
-      if (isAssessmentPage && assessmentSession && assessmentSession.status !== 'submitted') {
-        try {
-          await submitAssessment('auto_submit_on_logout')
-        } catch (error) {
-          console.error('Auto-submission failed during logout', error)
-        }
-      }
-    } finally {
-      await logout()
-      navigate(logoutRedirectTo, { replace: true })
+    // 1. Capture progress immediately if we are in an active assessment
+    if (isAssessmentPage && assessmentSession && assessmentSession.status !== 'submitted') {
+      autoSubmit('user_signout')
     }
+
+    // 2. Programmatically exit fullscreen if active
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {
+        /* Ignore errors if already exiting */
+      })
+    }
+
+    // 3. Perform auth logout
+    await logout()
+    navigate(logoutRedirectTo, { replace: true })
   }
 
   return (
@@ -77,4 +79,4 @@ function SessionShell({
   )
 }
 
-export default SessionShell
+export default SessionShell;

@@ -1,6 +1,6 @@
 # AssessmentEngine
 
-AssessmentEngine is a lightweight MERN assessment platform for SidLabs screening workflows.
+AssessmentEngine is a lightweight, secure MERN assessment platform for SidLabs screening workflows, now featuring AI-powered proctoring and advanced exam integrity controls.
 
 Brand line:
 
@@ -8,70 +8,67 @@ Brand line:
 
 ## Current Project State
 
-The current application includes two working experiences:
+The application provides a high-integrity evaluation environment with two core experiences:
 
-- candidate assessment flow
-- admin evaluator workspace
+- **Candidate Assessment Flow**: A locked-down, proctored environment for taking assessments.
+- **Admin Evaluator Workspace**: A dashboard for reviewing results and integrity reports.
 
-Implemented today:
+### Key Features Implemented:
 
-- candidate login with environment-configured credentials
-- candidate intake form with consent gate
-- JSON-driven assessment instructions
-- timed MCQ assessment engine
-- submission validation and MongoDB storage
-- thank-you completion flow
-- admin login with Mongo-backed hashed password
-- admin dashboard with summary metrics
-- admin submissions table with search and pagination
-- admin password change flow
-- shared SidLabs branding, footer, and responsive UI
+- **AI Proctoring**: Real-time face detection using TensorFlow.js (BlazeFace) to detect missing or multiple faces.
+- **Exam Integrity Hooks**: Comprehensive browser lockdown including full-screen enforcement, tab-switch detection, and clipboard protection.
+- **Security Violation System**: Real-time candidate alerts and automated logging of security incidents.
+- **Candidate Intake**: Form with consent gate and environment-configured credentials.
+- **Timed MCQ Engine**: JSON-driven assessment with auto-save and auto-expiry logic.
+- **Integrity Reporting**: Detailed violation logs stored in MongoDB for evaluator review.
+- **Admin Dashboard**: Summary metrics and paginated submission table with search/filtering.
+- **Secure Auth**: JWT cookie-based sessions with hashed password management.
 
 ## Stack
 
-- Frontend: React + Vite
-- Backend: Node.js + Express
-- Database: MongoDB with Mongoose
-- Auth: JWT cookie-based sessions
-- Testing: Vitest on client, Node test runner on server
+- **Frontend**: React + Vite, TensorFlow.js (AI Proctoring)
+- **Backend**: Node.js + Express
+- **Database**: MongoDB with Mongoose
+- **Auth**: JWT cookie-based sessions
+- **Security**: Page Visibility API, Fullscreen API, BlazeFace Detection
+- **Testing**: Vitest (Client), Node test runner (Server)
 
 ## Architecture Summary
 
 ### Frontend
 
-- `client/src/pages` contains route-level screens
-- `client/src/components` contains shared layout/UI pieces
-- `client/src/context` contains auth and assessment session state
-- `client/src/data` contains the current assessment JSON
-- `client/src/services/api.js` contains all frontend API calls
+- `client/src/hooks/useSecurityHooks.js`: Core logic for environment lockdown and incident detection.
+- `client/src/components/FaceProctor.jsx`: AI monitoring component using webcam and BlazeFace.
+- `client/src/components/ViolationModal.jsx`: Real-time feedback UI for candidate security alerts.
+- `client/src/context/AssessmentContext.jsx`: Orchestrates session state, violations, and sync.
+- `client/src/services/api.js`: Handles communication with the backend.
 
 ### Backend
 
-- `server/src/routes` defines API endpoints
-- `server/src/controllers` handles request/response logic
-- `server/src/services` contains validation and domain logic
-- `server/src/models` contains MongoDB models
-- `server/src/config` contains env, auth, DB, and assessment config
+- `server/src/models/assessmentSubmissionModel.js`: Stores assessment data along with a detailed `integrityReport`.
+- `server/src/services/submissionService.js`: Handles secure submission and violation logging.
+- `server/src/services/adminSubmissionTableService.js`: Processes submission data for evaluator review.
 
 ## Main Flows
 
-### Candidate Flow
+### Candidate Flow (High Integrity)
 
-1. Candidate logs in.
-2. Candidate fills identification details.
-3. Candidate accepts the consent prompt.
-4. Candidate reviews instructions.
-5. Candidate takes the timed MCQ assessment.
-6. Submission is validated server-side and stored in MongoDB.
-7. Candidate sees the thank-you page.
+1. **Login & Intake**: Candidate enters credentials and provides identification details.
+2. **Consent & Instructions**: Reviewing rules and accepting the proctoring consent.
+3. **Environment Lock**: The assessment enters full-screen mode and activates AI monitoring.
+4. **Assessment**: Candidate completes MCQ questions while the system monitors for:
+   - Tab switching / Window minimizing
+   - Full-screen exit
+   - Copy/Paste or Context Menu attempts
+   - Face missing or multiple people detected
+5. **Submission**: Results are saved along with an integrity report to MongoDB.
 
 ### Admin Flow
 
-1. Evaluator logs in.
-2. Evaluator lands on the admin dashboard.
-3. Evaluator reviews metrics and recent activity.
-4. Evaluator inspects paginated submission records.
-5. Evaluator can change the admin password securely.
+1. **Evaluator Login**: Secure access to the admin workspace.
+2. **Dashboard**: High-level overview of candidate activity.
+3. **Submission Review**: Detailed table view including completion status (e.g., "Terminated: Security violations" or "Partial: Tab switched").
+4. **Account Management**: Secure password update for admin credentials.
 
 ## Folder Structure
 
@@ -84,31 +81,18 @@ Implemented today:
 │   ├── index.html
 │   ├── package.json
 │   └── src/
-│       ├── App.jsx
-│       ├── AppRoutes.jsx
-│       ├── components/
-│       ├── config/
-│       ├── context/
-│       ├── data/
-│       ├── pages/
-│       ├── services/
-│       ├── test/
-│       ├── utils/
-│       ├── index.css
-│       └── theme.css
+│       ├── components/      # UI components (FaceProctor, ViolationModal, etc.)
+│       ├── hooks/           # useSecurityHooks for lockdown logic
+│       ├── context/         # Auth and Assessment state management
+│       ├── pages/           # Route-level screens
+│       └── services/        # API client
 └── server/
     ├── index.js
-    ├── package.json
     └── src/
-        ├── app.js
-        ├── server.js
-        ├── config/
-        ├── controllers/
-        ├── middleware/
-        ├── models/
-        ├── routes/
-        ├── services/
-        └── tests/
+        ├── models/          # MongoDB schemas (with IntegrityReport)
+        ├── routes/          # API endpoints
+        ├── services/        # Business logic and validation
+        └── middleware/      # Auth and logging
 ```
 
 ## Environment Setup
