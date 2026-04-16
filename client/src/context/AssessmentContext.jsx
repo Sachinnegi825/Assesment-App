@@ -96,7 +96,7 @@ export function AssessmentProvider({ children }) {
     minorHits.current[type] += 1
 
     // 4. Rule: 3 hits = 1 Major
-    if (minorHits.current[type] >= 3) {
+    if (minorHits.current[type] >= 4) {
       minorHits.current[type] = 0
       recordViolation(type === 'phone' ? 'mobile_phone' : type, `Security Alert: Repeated ${type} warning.`);
     }
