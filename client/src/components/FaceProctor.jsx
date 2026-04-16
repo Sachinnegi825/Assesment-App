@@ -136,7 +136,7 @@ export default function FaceProctor({ onDetection }) {
           const vRatio = (noseY - eyeMidY) / faceHeight;
 
           // Ultra strict: 4% sideways, 15% up, 35% down
-          if (hDev > 0.04 || vRatio < 0.15 || vRatio > 0.35) {
+          if (hDev > 0.06 || vRatio < 0.15 || vRatio > 0.35) {
             streak.gaze++;
             if (streak.gaze >= 2) triggerDetection('gaze', 'Please keep your eyes on the screen.');
           } else {
@@ -145,7 +145,7 @@ export default function FaceProctor({ onDetection }) {
         }
       } catch (err) {}
 
-      if (isMounted) setTimeout(scanFace, 400);
+      if (isMounted) setTimeout(scanFace, 700);
     }
     scanFace(); 
     return () => { isMounted = false; };
