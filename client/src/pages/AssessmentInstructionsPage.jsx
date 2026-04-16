@@ -64,7 +64,7 @@ function AssessmentInstructionsPage() {
             <li><strong>Full-Screen Mode:</strong> Exiting will trigger an immediate violation.</li>
           </ul>
           <p className="instructions-warning" style={{ marginTop: '1rem', fontWeight: 'bold' }}>
-            Violation Limit: 3 major warnings will result in automatic submission and disqualification.
+            Violation Limit: 5 major warnings will result in automatic submission and disqualification.
           </p>
         </article>
 
