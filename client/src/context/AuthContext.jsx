@@ -3,6 +3,7 @@ import {
   fetchSession,
   loginAdmin as loginAdminRequest,
   loginCandidate,
+  loginWithGoogle,
   logoutCandidate,
 } from '../services/api'
 import { AuthContext } from './authContextObject'
@@ -62,6 +63,13 @@ export function AuthProvider({ children }) {
     return payload.user
   }
 
+  async function googleLogin(credential) {
+    const payload = await loginWithGoogle(credential)
+    setUser(payload.user)
+    sessionStorage.setItem('ae_user_session', JSON.stringify(payload.user))
+    return payload.user
+  }
+
   async function loginAdmin(credentials) {
     const payload = await loginAdminRequest(credentials)
     setUser(payload.user)
@@ -98,6 +106,7 @@ export function AuthProvider({ children }) {
     isAdmin: user?.role === 'admin',
     isAuthenticated: Boolean(user),
     isAuthLoading,
+    googleLogin,
     loginAdmin,
     login,
     logout,

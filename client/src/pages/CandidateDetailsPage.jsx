@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SessionShell from '../components/SessionShell'
 import { useAssessment } from '../context/useAssessment'
@@ -10,13 +10,25 @@ function CandidateDetailsPage() {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { candidateDetails, saveCandidateDetails } = useAssessment()
-const [values, setValues] = useState({
-  fullName: "",
-  age: "",
-  email: "",
-  location: "",
-  roleApplied: ""
-})  
+  
+  const [values, setValues] = useState({
+    fullName: user?.name || "",
+    age: "",
+    email: user?.email || "",
+    location: "",
+    roleApplied: ""
+  })
+
+  // Sync state if user loads after initial render
+  useEffect(() => {
+    if (user) {
+      setValues(prev => ({
+        ...prev,
+        fullName: prev.fullName || user.name || "",
+        email: prev.email || user.email || ""
+      }))
+    }
+  }, [user])
 const [errors, setErrors] = useState({})
   const [submitError, setSubmitError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -109,6 +121,7 @@ const [errors, setErrors] = useState({})
                 type="text"
                 value={values.fullName}
                 required
+                readOnly={!!user?.name}
               />
               {errors.fullName ? <small className="field-error">{errors.fullName}</small> : null}
             </label>
@@ -142,6 +155,7 @@ const [errors, setErrors] = useState({})
                   type="email"
                   value={values.email}
                   required
+                  readOnly={!!user?.email}
                 />
                 {errors.email ? <small className="field-error">{errors.email}</small> : null}
               </label>

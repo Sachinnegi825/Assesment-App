@@ -1,3 +1,4 @@
+import { OAuth2Client } from 'google-auth-library'
 import { signAuthToken } from '../config/auth.js'
 import { env } from '../config/env.js'
 import {
@@ -5,6 +6,8 @@ import {
   toAdminSessionUser,
   verifyPassword,
 } from './adminAccountService.js'
+
+const client = new OAuth2Client(env.googleClientId)
 
 const demoUser = {
   email: env.demoUserEmail,
@@ -47,6 +50,41 @@ export async function authenticateCandidate({ email, password }) {
       sub: demoUser.id,
     }),
     user: demoUser,
+  }
+}
+
+export async function verifyGoogleToken(idToken) {
+  try {
+    const ticket = await client.verifyIdToken({
+      audience: env.googleClientId,
+      idToken,
+    })
+
+    const payload = ticket.getPayload()
+    if (!payload || !payload.email) {
+      return null
+    }
+
+    const user = {
+      email: payload.email,
+      id: payload.sub,
+      name: payload.name || payload.email.split('@')[0],
+      picture: payload.picture,
+      role: 'candidate',
+    }
+
+    return {
+      token: signAuthToken({
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        sub: user.id,
+      }),
+      user,
+    }
+  } catch (error) {
+    console.error('[server] Google token verification failed:', error.message)
+    return null
   }
 }
 

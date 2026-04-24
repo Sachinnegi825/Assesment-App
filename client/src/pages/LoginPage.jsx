@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google'
 import { BRAND_LINE } from '../config/constants'
 import BrandMark from '../components/BrandMark'
 import { useAuth } from '../context/useAuth'
@@ -8,7 +9,7 @@ import { validateLoginForm } from '../utils/loginValidation'
 function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { isAuthenticated, isAuthLoading, login, user } = useAuth()
+  const { isAuthenticated, isAuthLoading, login, googleLogin, user } = useAuth()
   const [values, setValues] = useState({ email: '', password: '' })
   const [errors, setErrors] = useState({})
   const [submitError, setSubmitError] = useState('')
@@ -59,6 +60,23 @@ function LoginPage() {
     }
   }
 
+  async function handleGoogleSuccess(credentialResponse) {
+    try {
+      setIsSubmitting(true)
+      setSubmitError('')
+      await googleLogin(credentialResponse.credential)
+      navigate(redirectTarget, { replace: true })
+    } catch (error) {
+      setSubmitError(error.message || 'Google login failed.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  function handleGoogleError() {
+    setSubmitError('Google login was unsuccessful. Please try again.')
+  }
+
   return (
     <main className="auth-shell">
       <section className="auth-card">
@@ -70,6 +88,23 @@ function LoginPage() {
             Sign in with your assigned assessment credentials to continue.
           </p>
         </div>
+
+        <div className="google-auth-container" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center' }}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            useOneTap
+            theme="filled_blue"
+            shape="rectangular"
+            width="100%"
+          />
+        </div>
+
+        <div className="auth-separator" style={{ margin: '1.5rem 0', textAlign: 'center', position: 'relative' }}>
+          <span style={{ background: 'white', padding: '0 0.75rem', color: '#666', fontSize: '0.875rem' }}>or sign in with email</span>
+          <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '1px', background: '#eee', zIndex: -1 }}></div>
+        </div>
+
         <form className="auth-form" noValidate onSubmit={handleSubmit}>
           <label className="field">
             <span>Email address</span>

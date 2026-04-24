@@ -56,6 +56,13 @@ export function loginCandidate(credentials) {
   })
 }
 
+export function loginWithGoogle(credential) {
+  return request('/api/auth/google-login', {
+    method: 'POST',
+    body: JSON.stringify({ credential }),
+  })
+}
+
 export function loginAdmin(credentials) {
   return request('/api/auth/admin/login', {
     method: 'POST',
