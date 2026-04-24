@@ -143,6 +143,9 @@ These are the current values in the local project env and the backend accepts th
 - Email: `evaluator@sidlabs.net`
 - Password: value currently set in `ADMIN_INITIAL_PASSWORD`
 
+- Email: `evaluatormain1@sidlabs.net`
+- Password: `Evaluatormain1@sidlabs.net`
+
 If admin login fails even with the correct password, check whether the admin user already exists in MongoDB with an older password hash.
 
 ## Local Setup
