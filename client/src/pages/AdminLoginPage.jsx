@@ -71,7 +71,7 @@ function AdminLoginPage() {
           <p className="eyebrow">{BRAND_LINE}</p>
           <h1>Admin login</h1>
           <p className="auth-support-copy">
-            Sign in as a SidLabs evaluator to review candidate assessments and
+            Sign in as an evaluator to review candidate assessments and
             administration data.
           </p>
         </div>

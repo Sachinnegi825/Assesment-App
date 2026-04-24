@@ -104,6 +104,17 @@ export function changeAdminPassword(payload) {
   })
 }
 
+export function fetchAdminSettings() {
+  return request('/api/admin/settings')
+}
+
+export function updateAdminSettings(payload) {
+  return request('/api/admin/settings', {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+  })
+}
+
 export function validateCandidateDetailsOnServer(candidateDetails) {
   return request('/api/candidate-details/validate', {
     method: 'POST',

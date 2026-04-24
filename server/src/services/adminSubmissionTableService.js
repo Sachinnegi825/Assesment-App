@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import { assessmentDefinition } from '../config/assessmentDefinition.js'
 import { AssessmentSubmissionModel } from '../models/assessmentSubmissionModel.js'
+import { getGlobalSettings } from './adminSettingsService.js'
 
 const DEFAULT_PAGE_SIZE = 10
 const MAX_PAGE_SIZE = 25
@@ -27,7 +28,11 @@ export async function getAdminSubmissionTableData(searchParams = {}) {
     throw new Error('database_unavailable')
   }
 
-  const filters = normalizeFilters(searchParams)
+  const [filters, settings] = await Promise.all([
+    normalizeFilters(searchParams),
+    getGlobalSettings(),
+  ])
+  
   const mongoFilter = buildMongoFilter(filters)
   const skip = (filters.page - 1) * filters.limit
 
@@ -46,7 +51,7 @@ export async function getAdminSubmissionTableData(searchParams = {}) {
       query: filters.query,
       status: filters.status,
     },
-    items: submissions.map(toAdminTableRow),
+    items: submissions.map(submission => toAdminTableRow(submission, settings)),
     pagination: {
       hasNextPage: filters.page < totalPages,
       hasPreviousPage: filters.page > 1,
@@ -113,9 +118,16 @@ function buildMongoFilter(filters) {
   return mongoFilter
 }
 
-function toAdminTableRow(submission) {
+function toAdminTableRow(submission, settings) {
   const answers = normalizeAnswers(submission.answers)
   const score = calculateScore(answers)
+  
+  const maxScore = assessmentDefinition.sourceQuestions.reduce((acc, q) => {
+    return acc + (assessmentDefinition.scoring.correct || q.score || 0)
+  }, 0)
+  
+  const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0
+  const isQualified = percentage >= (settings?.qualifyingThreshold || 60)
 
   return {
     age: submission.candidateDetails?.age || '',
@@ -136,6 +148,9 @@ function toAdminTableRow(submission) {
     location: submission.candidateDetails?.location || '',
     roleApplied: submission.candidateDetails?.roleApplied || '',
     score,
+    maxScore,
+    percentage,
+    isQualified,
     submissionTime: submission.submittedAt,
   }
 }

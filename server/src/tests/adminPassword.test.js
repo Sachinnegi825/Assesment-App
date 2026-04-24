@@ -34,7 +34,7 @@ test('POST /api/auth/admin/password updates the admin password with valid input'
       return {
         _id: 'admin-user-001',
         email: 'evaluator@sidlabs.net',
-        name: 'SidLabs Evaluator',
+        name: 'Evaluator',
         passwordHash: startingHash,
         role: 'admin',
       }

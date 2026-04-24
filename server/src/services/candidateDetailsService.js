@@ -57,7 +57,7 @@ export async function validateCandidateDetails(details = {}, checkDuplicates = t
       });
 
       if (existingSubmission) {
-        errors.email = 'You have already taken this assessment. Multiple attempts are not permitted. If you believe this is an error, please contact the administrator at evaluator@sidlabs.net.';
+        errors.email = 'You have already taken this assessment. Multiple attempts are not permitted. If you believe this is an error, please contact the administrator.';
       }
     } catch (dbError) {
       console.error('[server] Error checking for duplicate candidate:', dbError);

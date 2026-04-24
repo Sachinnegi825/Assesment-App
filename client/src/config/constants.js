@@ -1,5 +1,4 @@
-export const BRAND_LINE = 'This research is powered by SidLabs LLP'
-
+export const BRAND_LINE = 'SL Instruments Research Lab'
 export const APP_COPY = {
   title: 'Assessment Engine',
   subtitle:

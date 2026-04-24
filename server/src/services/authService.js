@@ -9,7 +9,7 @@ import {
 const demoUser = {
   email: env.demoUserEmail,
   id: 'demo-candidate-001',
-  name: 'SidLabs Demo Candidate',
+  name: 'Demo Candidate',
   role: 'candidate',
 }
 

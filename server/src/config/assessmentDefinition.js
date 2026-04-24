@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const currentDir = path.dirname(fileURLToPath(import.meta.url))
 const masterAssessmentPath = path.resolve(
   currentDir,
-  '../../../client/src/data/masterAssessment.json',
+  '../../../client/src/data/masterAssessment_v2.json',
 )
 
 const masterAssessmentJson = JSON.parse(

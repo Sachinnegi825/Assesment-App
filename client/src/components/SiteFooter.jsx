@@ -21,13 +21,13 @@ function SiteFooter() {
       <div className="site-footer__inner">
         <div className="site-footer__brand">
           <BrandMark />
-          <p className="site-footer__summary">
+          {/* <p className="site-footer__summary">
             SidLabs builds AI-powered MVPs, research systems, and founder-first
             product experiences with a lightweight, execution-focused approach.
-          </p>
+          </p> */}
         </div>
 
-        <div className="site-footer__grid">
+        {/* <div className="site-footer__grid">
           <section className="site-footer__section">
             <p className="site-footer__title">Quick Links</p>
             <div className="site-footer__links">
@@ -63,11 +63,11 @@ function SiteFooter() {
               </p>
             </div>
           </section>
-        </div>
+        </div> */}
 
         <div className="site-footer__legal">
-          <p>© 2026 SidLabs LLP. All rights reserved.</p>
-          <p>Built for research, applicant screening, and evaluator workflows.</p>
+<p>© 2026 SL Instruments Research Lab. All rights reserved.</p>
+          {/* <p>Built for research, applicant screening, and evaluator workflows.</p> */}
         </div>
       </div>
     </footer>

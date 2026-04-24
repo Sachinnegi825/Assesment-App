@@ -767,12 +767,17 @@
 
 .dashboard-badge--warning {
   background: rgba(200, 146, 56, 0.16);
-  color: #8c6022;
+  color: #8c6022 !important;
 }
 
 .dashboard-badge--neutral {
   background: rgba(18, 33, 23, 0.08);
-  color: var(--text-muted);
+  color: var(--text-muted) !important;
+}
+
+.dashboard-badge--danger {
+  background: var(--danger-soft);
+  color: var(--danger) !important;
 }
 
 .dashboard-breakdown {

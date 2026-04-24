@@ -14,7 +14,7 @@
     "express",
     "mern"
   ],
-  "author": "SidLabs LLP",
+  "author": "SL Instruments",
   "license": "ISC",
   "type": "module",
   "dependencies": {

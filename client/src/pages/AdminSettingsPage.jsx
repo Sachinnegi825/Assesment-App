@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminWorkspaceNav from '../components/AdminWorkspaceNav'
 import SessionShell from '../components/SessionShell'
 import { useAuth } from '../context/useAuth'
-import { changeAdminPassword } from '../services/api'
+import { changeAdminPassword, fetchAdminSettings, updateAdminSettings } from '../services/api'
 import { validateAdminPasswordForm } from '../utils/adminPasswordValidation'
 
 function AdminSettingsPage() {
@@ -14,10 +14,34 @@ function AdminSettingsPage() {
     currentPassword: '',
     newPassword: '',
   })
+  const [settings, setSettings] = useState({
+    registrationCap: 100,
+    qualifyingThreshold: 60,
+  })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isUpdatingSettings, setIsUpdatingSettings] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [settingsError, setSettingsError] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
+  const [settingsSuccess, setSettingsSuccess] = useState('')
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const response = await fetchAdminSettings()
+        if (response.success) {
+          setSettings({
+            registrationCap: response.data.registrationCap,
+            qualifyingThreshold: response.data.qualifyingThreshold,
+          })
+        }
+      } catch (error) {
+        console.error('Failed to load settings:', error)
+      }
+    }
+    loadSettings()
+  }, [])
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -32,6 +56,34 @@ function AdminSettingsPage() {
     }))
     setSubmitError('')
     setSuccessMessage('')
+  }
+
+  function handleSettingsChange(event) {
+    const { name, value } = event.target
+    setSettings((current) => ({
+      ...current,
+      [name]: value,
+    }))
+    setSettingsError('')
+    setSettingsSuccess('')
+  }
+
+  async function handleSettingsSubmit(event) {
+    event.preventDefault()
+    try {
+      setIsUpdatingSettings(true)
+      setSettingsError('')
+      setSettingsSuccess('')
+
+      const response = await updateAdminSettings(settings)
+      if (response.success) {
+        setSettingsSuccess('Assessment configurations updated successfully.')
+      }
+    } catch (error) {
+      setSettingsError(error.message || 'Failed to update settings.')
+    } finally {
+      setIsUpdatingSettings(false)
+    }
   }
 
   async function handleSubmit(event) {
@@ -94,6 +146,74 @@ function AdminSettingsPage() {
       <AdminWorkspaceNav />
 
       <section className="dashboard-grid dashboard-grid--single">
+        {/* Global Assessment Configuration */}
+        <article className="dashboard-panel" style={{ marginBottom: '2rem' }}>
+          <div className="dashboard-panel__header">
+            <div>
+              <p className="info-card__label">System configuration</p>
+              <h2>Assessment settings</h2>
+              <p className="dashboard-panel__copy">
+                Manage global limits and thresholds for all candidates.
+              </p>
+            </div>
+          </div>
+
+          <form className="admin-settings-form" noValidate onSubmit={handleSettingsSubmit}>
+            <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+              <label className="field">
+                <span>Registration cap (Max participants)</span>
+                <input
+                  className="input"
+                  name="registrationCap"
+                  onChange={handleSettingsChange}
+                  placeholder="e.g. 100"
+                  type="number"
+                  value={settings.registrationCap}
+                />
+                <small className="field-hint">Maximum number of candidates allowed to submit.</small>
+              </label>
+
+              <label className="field">
+                <span>Qualifying threshold (%)</span>
+                <input
+                  className="input"
+                  max="100"
+                  min="0"
+                  name="qualifyingThreshold"
+                  onChange={handleSettingsChange}
+                  placeholder="e.g. 60"
+                  type="number"
+                  value={settings.qualifyingThreshold}
+                />
+                <small className="field-hint">Minimum percentage score required to pass.</small>
+              </label>
+            </div>
+
+            {settingsError ? (
+              <div className="form-message form-message--error" role="alert">
+                {settingsError}
+              </div>
+            ) : null}
+
+            {settingsSuccess ? (
+              <div className="form-message form-message--info" role="status">
+                {settingsSuccess}
+              </div>
+            ) : null}
+
+            <div className="admin-filter-actions">
+              <button
+                className="primary-button primary-button--admin"
+                disabled={isUpdatingSettings}
+                type="submit"
+              >
+                {isUpdatingSettings ? 'Saving...' : 'Save configurations'}
+              </button>
+            </div>
+          </form>
+        </article>
+
+        {/* Account Security */}
         <article className="dashboard-panel">
           <div className="dashboard-panel__header">
             <div>

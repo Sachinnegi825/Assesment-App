@@ -138,7 +138,7 @@ const [errors, setErrors] = useState({})
                   name="email"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder="candidate@sidlabs.com"
+                  placeholder="your@email.com"
                   type="email"
                   value={values.email}
                   required

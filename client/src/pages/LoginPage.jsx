@@ -78,7 +78,7 @@ function LoginPage() {
               className={errors.email ? 'input input--error' : 'input'}
               name="email"
               onChange={handleChange}
-              placeholder="candidate@sidlabs.com"
+              placeholder="your@email.com"
               type="email"
               value={values.email}
             />

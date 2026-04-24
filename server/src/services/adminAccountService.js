@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { env } from '../config/env.js'
 import { AdminUserModel } from '../models/adminUserModel.js'
 
-const ADMIN_NAME = 'SidLabs Evaluator'
+const ADMIN_NAME = 'Evaluator'
 const PASSWORD_SALT_ROUNDS = 12
 
 const defaultRepository = {

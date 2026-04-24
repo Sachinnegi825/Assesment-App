@@ -233,6 +233,8 @@ function AdminDashboardPage() {
   className={`dashboard-badge dashboard-badge--${
     submission.statusLabel === 'Completed manually'
       ? 'success'
+      : submission.reason === 'integrity_violation_limit'
+      ? 'danger'
       : 'warning'
   }`}
 >

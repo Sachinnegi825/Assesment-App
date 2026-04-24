@@ -102,7 +102,7 @@ describe('assessment flow', () => {
     logout: async () => {},
     user: {
       email: 'candidate@sidlabs.com',
-      name: 'SidLabs Demo Candidate',
+      name: 'demo Candidate',
       role: 'candidate',
     },
   }
@@ -116,7 +116,7 @@ describe('assessment flow', () => {
     logout: async () => {},
     user: {
       email: 'evaluator@sidlabs.net',
-      name: 'SidLabs Evaluator',
+      name: 'Evaluator',
       role: 'admin',
     },
   }

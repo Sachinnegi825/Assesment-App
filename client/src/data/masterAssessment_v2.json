@@ -1,0 +1,390 @@
+{
+  "assessment_meta": {
+    "title": "SL Instruments — Technical Aptitude Screen",
+    "total_questions": 25,
+    "time_limit_minutes": 25,
+    "scoring": {
+      "correct": 1,
+      "incorrect": -1,
+      "unanswered": 0
+    },
+    "intent": "Screen for hands-on technical intuition in electronics, signal processing, and fabrication. No prior project knowledge required or expected. Tests instinct, not lookup."
+  },
+  "questions": [
+    {
+      "id": 1,
+      "section": "Electronics",
+      "topic": "Input Impedance",
+      "question": "A piezo disc sensor has very high source impedance. What input impedance should the amplifier stage present?",
+      "options": {
+        "A": "≥1 MΩ",
+        "B": "50 Ω (matched)",
+        "C": "1 kΩ",
+        "D": "10 kΩ"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "Fundamental electronics — piezo loading. Wrong answer means candidate will destroy signal before it reaches the ADC."
+    },
+    {
+      "id": 2,
+      "section": "Signal Processing",
+      "topic": "FFT Artefacts",
+      "question": "You compute an FFT and see signal energy smearing into adjacent frequency bins. What is the standard remedy?",
+      "options": {
+        "A": "Increase the sampling rate",
+        "B": "Apply a window function (e.g. Hann) before the FFT",
+        "C": "Shorten the capture duration",
+        "D": "Add more measurement channels"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Spectral leakage — a builder who has run real FFTs knows this immediately."
+    },
+    {
+      "id": 3,
+      "section": "Fabrication",
+      "topic": "Adhesive Bonding",
+      "question": "You bond a sensor to a surface using cyanoacrylate and leave excess adhesive pooled around the edges. The most likely consequence is:",
+      "options": {
+        "A": "Stronger mechanical coupling",
+        "B": "No measurable difference",
+        "C": "Spectral distortion from added mass and damping",
+        "D": "Faster signal transmission"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Mechanical intuition. Excess adhesive is a documented failure mode — tests whether candidate has bonded things, not just read about it."
+    },
+    {
+      "id": 4,
+      "section": "Electronics",
+      "topic": "EMI Sources",
+      "question": "Which item in a typical lab is most likely to radiate ultrasonic electrical noise that contaminates a sensitive measurement?",
+      "options": {
+        "A": "A paper notebook",
+        "B": "A wooden workbench",
+        "C": "A cotton cable sleeve",
+        "D": "A switched-mode laptop charger"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Real-world lab awareness. SMPS chargers are well-known ultrasonic noise sources."
+    },
+    {
+      "id": 5,
+      "section": "Electronics",
+      "topic": "Grounding",
+      "question": "A sensitive analog measurement shows 50 Hz hum that disappears when you disconnect one cable. The most likely root cause is:",
+      "options": {
+        "A": "A ground loop in the cable routing",
+        "B": "ADC firmware error",
+        "C": "Incorrect sampling rate",
+        "D": "Wrong window function"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "Classic analog debugging. Anyone who has run a real measurement bench has fought a ground loop."
+    },
+    {
+      "id": 6,
+      "section": "Signal Processing",
+      "topic": "Nyquist Theorem",
+      "question": "You need to reliably capture signal content up to 80 kHz. What is the minimum acceptable sampling rate?",
+      "options": {
+        "A": "40 kHz",
+        "B": "80 kHz",
+        "C": "100 kHz",
+        "D": "160 kHz"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Nyquist — must be 2× the highest frequency of interest. Fundamental for any signal capture work."
+    },
+    {
+      "id": 7,
+      "section": "Signal Processing",
+      "topic": "Q-Factor",
+      "question": "An FFT shows a resonance peak that is very narrow and very tall. This indicates:",
+      "options": {
+        "A": "High Q-factor — low damping, sharp resonance",
+        "B": "Low Q-factor — high damping, broad response",
+        "C": "A noise artefact from a ground loop",
+        "D": "A hardware fault in the ADC"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "Q-factor intuition. Narrow = high Q = low damping. Essential for interpreting resonance data."
+    },
+    {
+      "id": 8,
+      "section": "Software",
+      "topic": "DAQ Reliability",
+      "question": "A multichannel audio capture pipeline occasionally drops samples mid-session. The most likely cause is:",
+      "options": {
+        "A": "Wrong FFT window function",
+        "B": "Buffer underrun or insufficient CPU headroom",
+        "C": "SNR is too high",
+        "D": "Temperature change in the room"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Embedded/DAQ reality check. Buffer management is the most common source of dropped-sample bugs."
+    },
+    {
+      "id": 9,
+      "section": "Fabrication",
+      "topic": "Vibration Isolation",
+      "question": "You mount a resonant test object directly onto a rigid steel plate bolted to the workbench. The core problem with this setup is:",
+      "options": {
+        "A": "The object may look uneven",
+        "B": "It adds unnecessary weight",
+        "C": "Environmental vibrations from the bench couple directly into the measurement",
+        "D": "There is no problem"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Vibration isolation — a critical but commonly overlooked mechanical principle in precision measurement."
+    },
+    {
+      "id": 10,
+      "section": "Reasoning",
+      "topic": "Data Integrity",
+      "question": "You train a classifier on data collected in the morning and test it on data from the afternoon of the same session. Accuracy is 97%. What should concern you?",
+      "options": {
+        "A": "The model is almost certainly production-ready",
+        "B": "The feature set is probably too large",
+        "C": "The features are likely poorly chosen",
+        "D": "Temporal correlation between training and test sets may have caused data leakage"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Data leakage awareness. Session-based splits are a classic source of inflated accuracy in low-data experiments."
+    },
+    {
+      "id": 11,
+      "section": "Signal Processing",
+      "topic": "SNR Arithmetic",
+      "question": "SNR improves by 20 dB. By what factor has the signal-to-noise power ratio changed?",
+      "options": {
+        "A": "100×",
+        "B": "20×",
+        "C": "10×",
+        "D": "2×"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "dB arithmetic. 20 dB = 10^(20/10) = 100× power ratio. Separates candidates who understand dB from those who have only seen the symbol."
+    },
+    {
+      "id": 12,
+      "section": "Fabrication",
+      "topic": "Repeatability",
+      "question": "Setup A measures a resonance frequency as: 1000 Hz, 1002 Hz, 999 Hz across three runs. Setup B gives: 1000 Hz, 1150 Hz, 870 Hz. Which setup is more repeatable?",
+      "options": {
+        "A": "Setup A",
+        "B": "Setup B",
+        "C": "They are equal",
+        "D": "Cannot be determined from this data"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "Direct variance comparison. Tests whether candidate understands repeatability vs single-point accuracy."
+    },
+    {
+      "id": 13,
+      "section": "Fabrication",
+      "topic": "Test Fixture Design",
+      "question": "You need to measure the natural resonant frequency of a metal object without the fixture influencing the result. The best support method is:",
+      "options": {
+        "A": "Epoxy the object to a heavy steel plate",
+        "B": "Hold it by hand for each measurement",
+        "C": "Suspend or rest it on soft elastomer isolators",
+        "D": "Place it directly on rough concrete"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Fixture design — soft mounts decouple the test object from environmental vibration. Critical for clean resonance measurement."
+    },
+    {
+      "id": 14,
+      "section": "Reasoning",
+      "topic": "Validation Strategy",
+      "question": "You have 180 labeled samples for a classification task. Which validation approach gives the most reliable performance estimate?",
+      "options": {
+        "A": "Random 50/50 train-test split",
+        "B": "No validation — just report training accuracy",
+        "C": "Train and test on the same full dataset",
+        "D": "k-fold cross-validation (k = 5 or 10)"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Low-data validation fundamentals. k-fold maximises use of limited labeled data."
+    },
+    {
+      "id": 15,
+      "section": "Reasoning",
+      "topic": "Scientific Rigour",
+      "question": "A classifier that was performing at 72% accuracy suddenly jumps to 99% after a minor code change. The correct first response is:",
+      "options": {
+        "A": "Publish the result immediately",
+        "B": "Investigate for data leakage — the new code may have introduced label contamination",
+        "C": "Add more training data to confirm",
+        "D": "Deploy to production"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Scientific debugging instinct. Sudden large improvements almost always mean a bug, not a breakthrough."
+    },
+    {
+      "id": 16,
+      "section": "Electronics",
+      "topic": "Balanced Lines",
+      "question": "Why are balanced differential signal connections preferred over single-ended for long cable runs in precision analog measurement?",
+      "options": {
+        "A": "They are cheaper to manufacture",
+        "B": "They support higher bandwidth",
+        "C": "They reject common-mode noise picked up along the cable",
+        "D": "They weigh less"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "CMRR — fundamental analog signal integrity. A candidate who has wired a real measurement rig knows this."
+    },
+    {
+      "id": 17,
+      "section": "Fabrication",
+      "topic": "Prototyping Adhesives",
+      "question": "During prototyping you need to bond a sensor temporarily — you will reposition it multiple times. The most appropriate adhesive is:",
+      "options": {
+        "A": "Two-part epoxy",
+        "B": "Superglue (cyanoacrylate)",
+        "C": "Spot-welding",
+        "D": "Beeswax or a reversible thermoplastic adhesive"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Practical adhesive knowledge. Beeswax is a standard acoustic measurement adhesive precisely because it is reversible."
+    },
+    {
+      "id": 18,
+      "section": "Signal Processing",
+      "topic": "Frequency Resolution",
+      "question": "Two peaks in your FFT are very close together in frequency and are blending into one. To separate them clearly, you should:",
+      "options": {
+        "A": "Apply a high-pass filter",
+        "B": "Increase the FFT window length by capturing more samples",
+        "C": "Increase the sampling rate",
+        "D": "Reduce the number of measurement channels"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Frequency resolution = sampling rate / FFT size. More samples = finer resolution. Core DSP."
+    },
+    {
+      "id": 19,
+      "section": "Software",
+      "topic": "Model Selection",
+      "question": "You have 500 labeled samples, 15 engineered features, and a classification task with 8 classes. Which model family is most appropriate?",
+      "options": {
+        "A": "Deep convolutional neural network",
+        "B": "Unsupervised k-means clustering",
+        "C": "Random Forest or Support Vector Machine",
+        "D": "Large language model fine-tuning"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Low-data regime model selection. RF and SVM are well-suited for small, structured feature sets."
+    },
+    {
+      "id": 20,
+      "section": "Electronics",
+      "topic": "Shielding",
+      "question": "You wrap a signal cable in copper foil tape for EMI shielding. To be effective while avoiding a ground loop, the foil should be connected to ground:",
+      "options": {
+        "A": "At the signal source end only",
+        "B": "At both ends",
+        "C": "At neither end",
+        "D": "At the midpoint of the cable"
+      },
+      "ans": ["A"],
+      "score": 1,
+      "metadata": "Shield grounding — single-end grounding prevents ground loops while still providing shielding. Classic analog layout rule."
+    },
+    {
+      "id": 21,
+      "section": "Fabrication",
+      "topic": "Dimensional Accuracy",
+      "question": "A part is designed to be exactly 50.0 mm wide. Your caliper reads 50.4 mm. What is the dimensional error as a percentage?",
+      "options": {
+        "A": "0.04%",
+        "B": "4.0%",
+        "C": "0.8%",
+        "D": "8.0%"
+      },
+      "ans": ["C"],
+      "score": 1,
+      "metadata": "Basic dimensional maths: 0.4 / 50 × 100 = 0.8%. Tests whether candidate actually uses a caliper and thinks in tolerances."
+    },
+    {
+      "id": 22,
+      "section": "Electronics",
+      "topic": "Component Safety",
+      "question": "A piezo disc actuator is most commonly damaged by:",
+      "options": {
+        "A": "Operating at low DC voltage",
+        "B": "Exposure to ambient light",
+        "C": "Cold bench temperatures",
+        "D": "Excessive drive voltage or rapid heat buildup"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Practical safety knowledge. Over-voltage and thermal shock are the main piezo failure modes."
+    },
+    {
+      "id": 23,
+      "section": "Software",
+      "topic": "Version Control",
+      "question": "A teammate commits 200 MB raw data files directly into a Git repository. The correct practice is:",
+      "options": {
+        "A": "This is fine — Git can handle large files",
+        "B": "Use Git LFS or store data in a separate object store with only metadata in the repo",
+        "C": "Zip the files before committing",
+        "D": "Delete the repository and start again"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Git hygiene for data-heavy projects. Git LFS or separate storage is the standard approach."
+    },
+    {
+      "id": 24,
+      "section": "Fabrication",
+      "topic": "Measurement Discipline",
+      "question": "You plan to run 60 measurements on the same physical object over two weeks. Why is it critical to mark and log its orientation before every run?",
+      "options": {
+        "A": "For aesthetic consistency in documentation photos",
+        "B": "To comply with laboratory safety regulations",
+        "C": "To track weight distribution changes over time",
+        "D": "Inconsistent orientation changes which resonance modes are excited, breaking repeatability"
+      },
+      "ans": ["D"],
+      "score": 1,
+      "metadata": "Hidden failure mode — orientation affects mode shape excitation. Only candidates who have done real modal measurement know this intuitively."
+    },
+    {
+      "id": 25,
+      "section": "Reasoning",
+      "topic": "Systematic Debugging",
+      "question": "Your measurement results drift by 3% over a 2-hour session, with no code changes. The correct first diagnostic step is:",
+      "options": {
+        "A": "Retrain the classification model immediately",
+        "B": "Check environmental conditions — temperature and humidity affect material properties and sensor behaviour",
+        "C": "Rewrite the capture software from scratch",
+        "D": "Replace all hardware components"
+      },
+      "ans": ["B"],
+      "score": 1,
+      "metadata": "Systematic debugging instinct. Environmental drift is the most common cause of session-to-session variation in physical measurements."
+    }
+  ]
+}

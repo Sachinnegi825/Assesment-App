@@ -252,12 +252,11 @@ function AdminSubmissionsPage() {
                 <thead>
                   <tr>
                     <th>Candidate</th>
-                    <th>Age</th>
                     <th>Location</th>
                     <th>Role</th>
-                    <th>Assessment</th>
                     <th>Status</th>
                     <th>Score</th>
+                    <th>Result</th>
                     <th>Submitted</th>
                   </tr>
                 </thead>
@@ -268,25 +267,30 @@ function AdminSubmissionsPage() {
                         <strong>{item.candidateName}</strong>
                         <span>{item.candidateEmail}</span>
                       </td>
-                      <td>{item.age || 'N/A'}</td>
                       <td>{item.location || 'N/A'}</td>
                       <td>{item.roleApplied || 'N/A'}</td>
-                      <td>
-                        <strong>{item.assessmentTitle}</strong>
-                        <span>{item.assessmentId}</span>
-                      </td>
                       <td>
                        <span
   className={`dashboard-badge dashboard-badge--${
     item.completionStatus === 'Completed manually'
       ? 'success'
+      : item.completionStatus === 'Security violation'
+      ? 'danger'
       : 'warning'
   }`}
 >
   {item.completionStatus}
 </span>
                       </td>
-                      <td>{item.score}</td>
+                      <td>
+                        <strong>{item.score} / {item.maxScore}</strong>
+                        <span>{item.percentage}%</span>
+                      </td>
+                      <td>
+                        <span className={`dashboard-badge dashboard-badge--${item.isQualified ? 'success' : 'danger'}`}>
+                          {item.isQualified ? 'QUALIFIED' : 'FAILED'}
+                        </span>
+                      </td>
                       <td>{formatSubmissionTime(item.submissionTime)}</td>
                     </tr>
                   ))}

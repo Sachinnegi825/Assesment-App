@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
 import adminDashboardRoutes from './routes/adminDashboardRoutes.js'
+import adminSettingsRoutes from './routes/adminSettingsRoutes.js'
 import adminSubmissionRoutes from './routes/adminSubmissionRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import candidateDetailsRoutes from './routes/candidateDetailsRoutes.js'
@@ -33,6 +34,7 @@ export function createApp() {
   app.use('/api/health', healthRoutes)
   app.use('/api/auth', authRoutes)
   app.use('/api/admin/dashboard', adminDashboardRoutes)
+  app.use('/api/admin/settings', adminSettingsRoutes)
   app.use('/api/admin/submissions', adminSubmissionRoutes)
   app.use('/api/candidate-details', candidateDetailsRoutes)
   app.use('/api/submissions', submissionRoutes)
